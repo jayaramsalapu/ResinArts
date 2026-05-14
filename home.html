@@ -80,6 +80,10 @@ color:#1a140f;
 /* HERO */
 /* ========================= */
 
+/* ========================= */
+/* HERO */
+/* ========================= */
+
 .hero{
 min-height:100dvh;
 display:flex;
@@ -89,40 +93,58 @@ text-align:center;
 padding:40px 20px;
 position:relative;
 overflow:hidden;
+
 background:
 linear-gradient(rgba(255,248,240,.92),rgba(255,248,240,.92)),
 url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1800&auto=format&fit=crop') center/cover;
 }
+
+/* GOLD GLOW */
 
 .hero::before{
 content:'';
 position:absolute;
 width:500px;
 height:500px;
-background:radial-gradient(circle,
+
+background:radial-gradient(
+circle,
 rgba(212,175,55,.18),
-transparent 70%);
+transparent 70%
+);
+
 filter:blur(30px);
+
 animation:glowMove 10s infinite alternate ease-in-out;
 }
 
 @keyframes glowMove{
+
 from{
 transform:translate(-120px,-80px);
 }
+
 to{
 transform:translate(120px,80px);
 }
+
 }
+
+/* ========================= */
+/* HERO CONTENT */
+/* ========================= */
 
 .hero-content{
 position:relative;
-z-index:2;
+z-index:5;
 max-width:900px;
+margin:auto;
+padding:0 20px;
 }
 
 .hero h1{
 font-size:clamp(4rem,10vw,7rem);
+line-height:1.3;
 }
 
 .hero p{
@@ -135,29 +157,30 @@ color:#5e4720;
 /* ========================= */
 /* FLOATING HERO IMAGES */
 /* ========================= */
-/* ========================= */
-/* FLOATING HERO IMAGES */
-/* ========================= */
-.hero-content{
-position:relative;
-z-index:5;
-max-width:900px;
-}
 
 .floating-img{
 position:absolute;
-width:145px;
-height:190px;
+
+width:170px;
+height:220px;
+
 padding:8px;
-border-radius:30px;
+
+border-radius:28px;
 overflow:hidden;
-background:rgba(255,255,255,.6);
-backdrop-filter:blur(10px);
+
+background:rgba(255,255,255,.65);
+
+backdrop-filter:blur(12px);
+
 box-shadow:
-0 10px 35px rgba(0,0,0,.12),
-0 0 25px rgba(212,175,55,.12);
-z-index:1;
-animation:floatCard 6s ease-in-out infinite;
+0 15px 40px rgba(0,0,0,.15),
+0 0 25px rgba(212,175,55,.15);
+
+z-index:2;
+
+animation:floatCard 5s ease-in-out infinite;
+transition:.4s;
 }
 
 .floating-img img{
@@ -167,83 +190,202 @@ object-fit:cover;
 border-radius:22px;
 }
 
-/* LEFT TOP */
+/* LEFT IMAGE */
+
+/* LEFT BOTTOM IMAGE */
 
 .float1{
-top:80%;
-left:-70%;
+left:8%;
+bottom:40px;
+top:auto;
+
 transform:rotate(-10deg);
+
+animation-delay:0s;
 }
 
-/* LEFT LOWER */
+/* RIGHT BOTTOM IMAGE */
 
 .float2{
-top:80%;
-right:-70%;
+right:8%;
+bottom:40px;
+top:auto;
+
+transform:rotate(10deg);
+
 animation-delay:2s;
-transform:rotate(8deg);
 }
 
-/* RIGHT */
-
-
-
-/* Animation */
+/* FLOATING ANIMATION */
 
 @keyframes floatCard{
 
 0%{
-transform:translateY(0px) rotate(-6deg);
+margin-top:0;
 }
 
 50%{
-transform:translateY(-16px) rotate(-2deg);
+margin-top:-18px;
 }
 
 100%{
-transform:translateY(0px) rotate(-6deg);
+margin-top:0;
 }
 
 }
 
 /* ========================= */
-/* COMPLETE MOBILE UI */
+/* BUTTONS */
 /* ========================= */
+
+.btn-group{
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:40px;
+}
+
+.luxury-btn{
+position:relative;
+overflow:hidden;
+
+padding:15px 36px;
+
+border-radius:50px;
+
+font-weight:600;
+
+transition:.4s;
+
+min-width:190px;
+
+text-align:center;
+
+cursor:pointer;
+
+border:none;
+}
+
+.gold-btn{
+background:linear-gradient(90deg,#b8860b,#ffd700);
+color:black;
+}
+
+.outline-btn{
+border:1px solid #d4af37;
+background:transparent;
+color:#b8860b;
+}
+
+.luxury-btn:hover{
+transform:translateY(-5px);
+}
+
+.luxury-btn::before{
+content:'';
+
+position:absolute;
+
+top:0;
+left:-100%;
+
+width:100%;
+height:100%;
+
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.7),
+transparent
+);
+
+transition:.8s;
+}
+
+.luxury-btn:hover::before{
+left:100%;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+/* LARGE LAPTOP */
+
+@media(max-width:1200px){
+
+.floating-img{
+width:145px;
+height:190px;
+}
+
+.float1{
+left:3%;
+}
+
+.float2{
+right:3%;
+}
+
+}
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:5.5rem;
+}
+
+.hero p{
+font-size:1rem;
+line-height:1.9;
+}
+
+.floating-img{
+width:120px;
+height:160px;
+}
+
+.float1{
+top:18%;
+left:5%;
+}
+
+.float2{
+top:18%;
+right:5%;
+}
+
+}
+
+/* MOBILE */
 
 @media(max-width:768px){
 
-/* HERO */
-
 .hero{
-padding:60px 18px;
+padding:70px 18px;
 min-height:100vh;
 }
-
-/* HERO CONTENT */
 
 .hero-content{
 max-width:100%;
 padding:0 10px;
 }
 
-/* LOGO */
-
 .hero h1{
-font-size:3.2rem !important;
+font-size:3rem !important;
 line-height:1.2;
 }
-
-/* TEXT */
 
 .hero p{
 font-size:.95rem;
 line-height:1.9;
 margin-top:18px;
-margin-bottom: 50px;
+margin-bottom:50px;
 padding:0 10px;
 }
-
-/* HIGHLIGHT TEXT */
 
 .hero p span{
 font-size:1rem !important;
@@ -251,8 +393,6 @@ line-height:1.8;
 display:block;
 margin-top:10px;
 }
-
-/* BUTTONS */
 
 .btn-group{
 flex-direction:column;
@@ -265,6 +405,53 @@ margin-top:30px;
 width:220px;
 padding:14px 20px;
 font-size:.95rem;
+}
+
+/* FLOATING IMAGES */
+
+.floating-img{
+width:90px;
+height:120px;
+padding:6px;
+border-radius:20px;
+}
+
+.float1{
+top:12%;
+left:-5px;
+transform:rotate(-8deg);
+}
+
+.float2{
+top:12%;
+right:-5px;
+transform:rotate(8deg);
+}
+
+}
+
+/* EXTRA SMALL MOBILE */
+
+@media(max-width:420px){
+
+.hero h1{
+font-size:3.5rem !important;
+}
+
+.hero p{
+font-size:.88rem;
+}
+
+.floating-img{
+width:75px;
+height:100px;
+}
+
+.luxury-btn{
+width:200px;
+font-size:.9rem;
+}
+
 }
 
 /* FLOATING IMAGES */
@@ -608,9 +795,8 @@ height:260px;
 <section class="hero">
 
 <div class="hero-content">
-<!-- Floating Resin Images -->
-<!-- Floating Resin Images -->
 
+<!-- Floating Images -->
 <div class="floating-img float1">
     <img src="1.jpg">
 </div>
@@ -619,6 +805,9 @@ height:260px;
     <img src="2.jpg">
 </div>
 
+<div class="hero-content">
+
+<h1 class="logo-font gold">
 
 <h1 class="logo-font gold" style="font-size: 80px;">
 Shruthi_Resinarts
