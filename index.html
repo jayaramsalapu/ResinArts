@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shruthi ResinArts - Preserve Forever</title>
+    <!-- Lucide Icons & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        html, body { height: 100%; margin: 0; overflow: hidden; background: #1a1410; }
+
+        /* ==================== INTRO STORY STYLES ==================== */
+        .intro-scene { 
+            position: fixed; inset: 0; 
+            background: radial-gradient(circle at center, #2d2118 0%, #1a1410 100%);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 100; transition: opacity 1.5s ease-in-out;
+        }
+        .name{
+          margin-left: 550px !important;
+        }
+        .particles { position: absolute; inset: 0; pointer-events: none; }
+        .particle {
+            position: absolute; background: #d4af37; border-radius: 50%;
+            animation: float var(--duration) infinite ease-in-out;
+            opacity: var(--opacity);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-40px) translateX(var(--offset)); }
+        }
+
+        .story-phase {
+            position: absolute; width: 100%; text-align: center;
+            opacity: 0; transform: scale(0.95) translateY(10px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            padding: 0 20px;
+        }
+
+        .story-phase.active { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
+
+        .gold-text { font-family: 'Dancing Script', cursive; color: #d4af37; }
+        .serif-subtitle { font-family: 'Lora', serif; color: #c9a878; }
+
+        .value-tag {
+            display: inline-block; padding: 5px 15px; margin: 5px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px; font-size: 0.9rem;
+            opacity: 0; transform: scale(0.8);
+            transition: 0.5s ease forwards;
+        }
+        .active .value-tag { opacity: 1; transform: scale(1); }
+
+        /* Icon Animations */
+        .flower-animate { font-size: 80px; animation: flowerFall 3s ease-out forwards; }
+        @keyframes flowerFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            100% { transform: translateY(0) rotate(360deg); opacity: 1; }
+        }
+
+        .heart-particle {
+            position: absolute; font-size: 24px;
+            animation: heartFloat 2s ease-out forwards;
+        }
+        @keyframes heartFloat {
+            0% { opacity: 1; transform: translate(0, 0); }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.5); }
+        }
+
+        /* Timeline */
+        .timeline-dots {
+            position: absolute; bottom: 40px; left: 50%;
+            transform: translateX(-50%); display: flex; gap: 8px;
+        }
+        .dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: rgba(212, 175, 55, 0.2); transition: 0.4s;
+        }
+        .dot.active { background: #d4af37; width: 18px; border-radius: 10px; }
+
+        /* ==================== MAIN SITE STYLES ==================== */
+        #homepage {
+            height: 100vh; overflow-y: auto; opacity: 0; visibility: hidden;
+            background: #fffdf8; transition: opacity 1.2s ease;
+        }
+        #homepage.visible { opacity: 1; visibility: visible; }
+
+        .collection-card {
+            background: white; border: 1px solid #e8dcc8; border-radius: 20px;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0; transform: translateY(20px);
+        }
+        .collection-card.show { opacity: 1; transform: translateY(0); }
+        .collection-card:hover { transform: translateY(-10px); border-color: #d4af37; }
+
+        .skip-btn {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            color: #d4af37; border: 1px solid #d4af37; padding: 6px 15px;
+            border-radius: 20px; font-size: 14px; background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px); cursor: pointer;
+        }
+        /* Next Phase Arrow */
+        /* Navigation Buttons */
+.nav-btn{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    border: 1px solid rgba(212,175,55,0.45);
+
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+
+    color: #d4af37;
+    font-size: 28px;
+    cursor: pointer;
+
+    transition:
+        background 0.35s ease,
+        box-shadow 0.35s ease,
+        opacity 0.35s ease;
+
+    z-index: 200;
+}
+
+/* Keep fixed position */
+.nav-btn:hover{
+    background: rgba(212,175,55,0.14);
+    box-shadow: 0 0 18px rgba(212,175,55,0.35);
+}
+
+/* Remove moving effect */
+.nav-btn:active{
+    transform: translateY(-50%);
+}
+
+.next-btn{
+    right: 25px;
+}
+
+.prev-btn{
+    left: 25px;
+}
+/* ================= SIMPLE FINAL PHASE ================= */
+
+.final-phase{
+    position: relative;
+    overflow: hidden;
+}
+
+/* Soft Background Glow */
+.soft-glow{
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    background: radial-gradient(
+        circle,
+        rgba(212,175,55,0.18),
+        transparent 70%
+    );
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    filter: blur(30px);
+
+    animation: softPulse 5s ease-in-out infinite;
+}
+
+@keyframes softPulse{
+
+    0%,100%{
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50%{
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+
+}
+
+/* Brand Name */
+.final-brand{
+
+    position: relative;
+    z-index: 2;
+
+    font-family: 'Dancing Script', cursive;
+
+    font-size: 4rem;
+
+    color: #d4af37;
+
+    text-shadow:
+        0 0 12px rgba(212,175,55,0.35);
+
+    animation: fadeUp 1.4s ease;
+}
+
+/* Subtitle */
+.final-line{
+
+    position: relative;
+    z-index: 2;
+
+    margin-top: 12px;
+
+    color: #d8c7a3;
+
+    font-size: 1.05rem;
+
+    letter-spacing: 1px;
+
+    animation: fadeUp 1.8s ease;
+}
+
+/* Tags */
+.simple-tags{
+
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    max-width: 700px;
+
+    margin: 35px auto;
+
+    padding: 0 20px;
+
+    animation: fadeUp 2.2s ease;
+}
+
+.simple-tags span{
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(212,175,55,0.22);
+
+    color: #e4d2ae;
+
+    font-size: 0.92rem;
+
+    font-family: 'Lora', serif;
+
+    backdrop-filter: blur(6px);
+
+    transition: 0.3s ease;
+}
+
+.simple-tags span:hover{
+
+    border-color: rgba(212,175,55,0.5);
+
+    background: rgba(212,175,55,0.08);
+}
+
+/* Button */
+.final-enter-btn{
+
+    position: relative;
+    z-index: 2;
+
+    margin-top: 10px;
+
+    padding: 14px 38px;
+
+    border-radius: 999px;
+
+    border: none;
+
+    background: #d4af37;
+
+    color: #1a1410;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.35s ease;
+
+    box-shadow:
+        0 0 18px rgba(212,175,55,0.25);
+
+    animation: fadeUp 2.5s ease;
+}
+
+.final-enter-btn:hover{
+
+    transform: scale(1.04);
+
+    box-shadow:
+        0 0 25px rgba(212,175,55,0.4);
+}
+
+/* Smooth Entry */
+@keyframes fadeUp{
+
+    from{
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* ======================================== */
+/* COMPLETE MOBILE RESPONSIVE FIX */
+/* ======================================== */
+
+@media(max-width:768px){
+
+html,body{
+overflow-x:hidden;
+}
+
+/* INTRO */
+
+.intro-scene{
+padding:20px;
+}
+
+/* PHASE CONTAINER */
+
+.story-phase{
+padding:0 22px;
+}
+
+/* SVG LOGO */
+
+.name{
+margin-left:0 !important;
+display:flex;
+justify-content:center;
+align-items:center;
+width:100%;
+overflow:hidden;
+}
+
+.name svg{
+width:95vw !important;
+height:auto !important;
+}
+
+/* MAIN TITLES */
+
+.gold-text{
+font-size:2rem !important;
+line-height:1.3;
+}
+
+.serif-subtitle{
+font-size:1rem !important;
+line-height:1.8;
+}
+
+/* PHASE 5 */
+
+#phase5 h2:nth-child(1){
+font-size:2rem !important;
+}
+
+#phase5 h2:nth-child(2){
+font-size:2.5rem !important;
+line-height:1.3;
+}
+
+/* VALUE TAGS */
+
+.simple-tags{
+gap:10px;
+padding:0 10px;
+margin-top:25px;
+}
+
+.simple-tags span{
+font-size:.82rem;
+padding:8px 14px;
+}
+
+/* VALUE TAG SECTION */
+
+.value-tag{
+font-size:.82rem;
+padding:8px 14px;
+margin:6px;
+}
+
+/* FINAL BRAND */
+
+.final-brand{
+font-size:2.8rem !important;
+line-height:1.2;
+padding:0 10px;
+}
+
+.final-line{
+font-size:.92rem;
+line-height:1.8;
+padding:0 15px;
+}
+
+/* ENTER BUTTON */
+
+.final-enter-btn{
+padding:12px 26px;
+font-size:.95rem;
+}
+
+/* NAVIGATION BUTTONS */
+
+.nav-btn{
+
+width:42px;
+height:42px;
+
+font-size:20px;
+
+top:auto;
+bottom:90px;
+
+transform:none;
+}
+
+.nav-btn:active{
+transform:none;
+}
+
+.prev-btn{
+left:15px;
+}
+
+.next-btn{
+right:15px;
+}
+
+/* TIMELINE DOTS */
+
+.timeline-dots{
+bottom:28px;
+gap:6px;
+}
+
+.dot{
+width:5px;
+height:5px;
+}
+
+.dot.active{
+width:14px;
+}
+
+/* SKIP BUTTON */
+
+.skip-btn{
+top:15px;
+right:15px;
+font-size:12px;
+padding:5px 12px;
+}
+
+/* PARTICLES */
+
+.particle{
+opacity:.4 !important;
+}
+
+/* FINAL PHASE GLOW */
+
+.soft-glow{
+width:240px;
+height:240px;
+}
+
+/* TEXT SPACING */
+
+#phase1 h2,
+#phase2 h2,
+#phase8 h2{
+margin-top:20px;
+}
+
+/* LONG TEXT */
+
+#phase2 h2{
+font-size:1.05rem !important;
+line-height:2;
+}
+
+/* PREVENT OVERFLOW */
+
+*{
+max-width:100%;
+}
+
+/* SMALLER HEIGHT PHONES */
+
+@media(max-height:700px){
+
+.final-brand{
+font-size:2.2rem !important;
+}
+
+.gold-text{
+font-size:1.7rem !important;
+}
+
+.simple-tags{
+margin-top:18px;
+}
+
+.final-enter-btn{
+margin-top:0;
+}
+
+}
+
+}
+    </style>
+</head>
+<body>
+
+    <button class="skip-btn" id="skipBtn" onclick="window.location.href='home.html'">Skip Story</button>
+
+    <!-- INTRO STORY -->
+    <div class="intro-scene" id="introScene">
+
+        <div class="particles" id="particleField"></div>
+        <!-- Left Arrow -->
+<button id="prevBtn" class="nav-btn prev-btn">
+    ❮
+</button>
+
+<!-- Right Arrow -->
+<button id="nextBtn" class="nav-btn next-btn">
+    ❯
+</button>
+        <!-- Phase 1: The Hook -->
+        <div class="story-phase active" id="phase1">
+            <div class="name"><svg xmlns="http://www.w3.org/2000/svg" width="375.9265104166667" height="125.28721311475411" viewBox="-27.99984375 -70.28721311475411 375.9265104166667 125.28721311475411">
+<style>.letter-0 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 306.21; stroke-dashoffset: 306.21;
+  animation: write0 1.5s ease-in-out forwards;
+  animation-delay: 0.000s;
+}
+@keyframes write0 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-1 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 187.46; stroke-dashoffset: 187.46;
+  animation: write1 0.5s ease-in-out forwards;
+  animation-delay: 0.525s;
+}
+@keyframes write1 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-2 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 129.29; stroke-dashoffset: 129.29;
+  animation: write2 0.5s ease-in-out forwards;
+  animation-delay: 1.050s;
+}
+@keyframes write2 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-3 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 73.2; stroke-dashoffset: 73.2;
+  animation: write3 0.5s ease-in-out forwards;
+  animation-delay: 1.575s;
+}
+@keyframes write3 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-4 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 207.56; stroke-dashoffset: 207.56;
+  animation: write4 0.5s ease-in-out forwards;
+  animation-delay: 2.100s;
+}
+@keyframes write4 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-5 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 187.46; stroke-dashoffset: 187.46;
+  animation: write5 0.5s ease-in-out forwards;
+  animation-delay: 2.625s;
+}
+@keyframes write5 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-6 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 55.68; stroke-dashoffset: 55.68;
+  animation: write6 0.5s ease-in-out forwards;
+  animation-delay: 3.150s;
+}
+@keyframes write6 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-7 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 31.87; stroke-dashoffset: 31.87;
+  animation: write7 0.5s ease-in-out forwards;
+  animation-delay: 3.675s;
+}
+@keyframes write7 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-8 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 391.75; stroke-dashoffset: 391.75;
+  animation: write8 0.5s ease-in-out forwards;
+  animation-delay: 4.200s;
+}
+@keyframes write8 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-9 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 83.98; stroke-dashoffset: 83.98;
+  animation: write9 0.5s ease-in-out forwards;
+  animation-delay: 4.725s;
+}
+@keyframes write9 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-10 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 125.28; stroke-dashoffset: 125.28;
+  animation: write10 0.5s ease-in-out forwards;
+  animation-delay: 5.250s;
+}
+@keyframes write10 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-11 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 55.68; stroke-dashoffset: 55.68;
+  animation: write11 0.5s ease-in-out forwards;
+  animation-delay: 5.775s;
+}
+@keyframes write11 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-12 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 80.84; stroke-dashoffset: 80.84;
+  animation: write12 0.5s ease-in-out forwards;
+  animation-delay: 6.300s;
+}
+@keyframes write12 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-13 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 384.6; stroke-dashoffset: 384.6;
+  animation: write13 0.5s ease-in-out forwards;
+  animation-delay: 6.825s;
+}
+@keyframes write13 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-14 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 129.29; stroke-dashoffset: 129.29;
+  animation: write14 0.5s ease-in-out forwards;
+  animation-delay: 7.350s;
+}
+@keyframes write14 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-15 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 207.56; stroke-dashoffset: 207.56;
+  animation: write15 0.5s ease-in-out forwards;
+  animation-delay: 7.875s;
+}
+@keyframes write15 {
+  to { stroke-dashoffset: 0; }
+}
+.letter-16 {
+  fill: none; stroke: #c9a227; stroke-width: 1;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 125.28; stroke-dashoffset: 125.28;
+  animation: write16 0.5s ease-in-out forwards;
+  animation-delay: 8.400s;
+}
+@keyframes write16 {
+  to { stroke-dashoffset: 0; }
+}
+</style>
+<g><path d="M38.58-9.46Q38.88-9.40 39.08-9.14Q39.28-8.88 39.22-8.58Q39.16-8.28 38.88-8.08L38.88-8.08Q32.68-3.64 27.56 0.32L27.56 0.32Q28.08 1.96 27.68 3.92L27.68 3.92Q27.04 7.16 25.34 10.24Q23.64 13.32 21.46 15.64Q19.28 17.96 16.86 19.76Q14.44 21.56 12.26 22.52Q10.08 23.48 8.44 23.60L8.44 23.60Q8.20 23.64 8 23.64L8 23.64Q6.08 23.64 5.56 22.20L5.56 22.20Q4.64 19.68 9.84 13.92Q15.04 8.16 25.68-0.16L25.68-0.16Q24.48-2.36 20.96-4.22Q17.44-6.08 9.84-9.16L9.84-9.16Q7.76-10 6.64-10.48L6.64-10.48Q3.76-11.68 2.64-13.72Q1.52-15.76 2.36-18.40L2.36-18.40Q3.40-21.76 7.40-25.70Q11.40-29.64 16.14-32.60Q20.88-35.56 25.70-37.32Q30.52-39.08 33.16-38.48L33.16-38.48Q33.76-38.36 34.26-38.10Q34.76-37.84 35.28-37.32Q35.80-36.80 36.02-35.90Q36.24-35 36.08-33.76L36.08-33.76Q36.04-33.56 35.92-33.40Q35.80-33.24 35.60-33.16Q35.40-33.08 35.20-33.12L35.20-33.12Q34.88-33.16 34.68-33.42Q34.48-33.68 34.52-34L34.52-34Q34.76-35.48 34.26-36.12Q33.76-36.76 32.84-36.96L32.84-36.96Q31.36-37.32 28.84-36.72Q26.32-36.12 23.22-34.70Q20.12-33.28 16.92-31.20L16.92-31.20Q11.76-27.96 8.24-24.40Q4.72-20.84 3.84-17.96L3.84-17.96Q2.52-13.84 7.24-11.88L7.24-11.88Q8.32-11.44 10.44-10.60L10.44-10.60Q13.08-9.52 14.36-8.98Q15.64-8.44 17.72-7.54Q19.80-6.64 20.92-6Q22.04-5.36 23.36-4.52Q24.68-3.68 25.52-2.86Q26.36-2.04 26.92-1.12L26.92-1.12Q31.96-5.04 38-9.32L38-9.32Q38.28-9.52 38.58-9.46ZM26.20 3.60L26.20 3.60Q26.44 2.40 26.24 1.36L26.24 1.36Q17.72 8.04 12.72 13.12L12.72 13.12Q9.80 16.12 8.24 18.46Q6.68 20.80 7 21.68L7 21.68Q7.16 22.16 8.32 22.08L8.32 22.08Q9.68 21.96 11.66 21.08Q13.64 20.20 15.90 18.52Q18.16 16.84 20.22 14.70Q22.28 12.56 23.92 9.62Q25.56 6.68 26.20 3.60Z" class="letter-0"/></g>
+<g><path d="M55.44-9.24Q55.76-9.32 56.02-9.16Q56.28-9 56.36-8.68Q56.44-8.36 56.28-8.08L56.28-8.08Q54.96-5.96 53.76-4.30Q52.56-2.64 51.70-1.62Q50.84-0.60 50.04 0.10Q49.24 0.80 48.76 1.10Q48.28 1.40 47.80 1.50Q47.32 1.60 47.14 1.58Q46.96 1.56 46.72 1.52L46.72 1.52Q44.84 1.04 44.60-2.76L44.60-2.76Q44.56-3.60 44.40-4.18Q44.24-4.76 44.12-4.94Q44.00-5.12 43.92-5.12L43.92-5.12Q43.88-5.12 43.88-5.12L43.88-5.12Q43.56-5.12 43.00-4.62Q42.44-4.12 41.64-3Q40.84-1.88 39.96-0.28Q39.08 1.32 38.02 3.76Q36.96 6.20 35.96 9.04L35.96 9.04Q35.80 9.56 35.24 9.56L35.24 9.56Q35.16 9.56 35.08 9.56L35.08 9.56Q34.88 9.52 34.74 9.40Q34.60 9.28 34.52 9.10Q34.44 8.92 34.48 8.76L34.48 8.76Q34.56 7.12 36.58-1.78Q38.60-10.68 39.90-16.10Q41.20-21.52 41.92-24.40L41.92-24.40Q43.28-29.92 45.06-33.82Q46.84-37.72 48.12-37.96L48.12-37.96Q48.80-38.08 49.16-37.56L49.16-37.56Q50.04-36.36 48.14-31.36Q46.24-26.36 42.24-19.12L42.24-19.12Q39.16-6.44 37.48 1.24L37.48 1.24Q39.24-2.48 40.96-4.66Q42.68-6.84 44.12-6.64L44.12-6.64Q45.92-6.40 46.12-2.88L46.12-2.88Q46.32-0.20 47.08 0L47.08 0Q47.20 0.04 47.42 0Q47.64-0.04 48.32-0.48Q49.00-0.92 49.80-1.78Q50.60-2.64 51.98-4.48Q53.36-6.32 54.96-8.92L54.96-8.92Q55.12-9.16 55.44-9.24ZM47.84-35.72L47.84-35.72Q45.64-32.56 43.72-25.28L43.72-25.28Q47.24-32.36 47.84-35.72Z" class="letter-1"/></g>
+<g><path d="M70.82-9.10Q71.12-9.20 71.40-9.06Q71.68-8.92 71.80-8.62Q71.92-8.32 71.76-8.04L71.76-8.04Q70.68-5.72 69.32-3.28Q67.96-0.84 66.34 1.66Q64.72 4.16 63.12 5.74Q61.52 7.32 60.40 7.32L60.40 7.32Q60.12 7.32 59.88 7.20L59.88 7.20Q58.24 6.56 58.84 2.24L58.84 2.24Q59.40-1.80 61.80-9.20L61.80-9.20Q61.76-9.20 61.74-9.18Q61.72-9.16 61.68-9.16L61.68-9.16Q60.80-8.56 60.22-8.24Q59.64-7.92 58.66-7.52Q57.68-7.12 56.80-7.16Q55.92-7.20 55.16-7.72L55.16-7.72Q53.64-8.80 53.60-10.72Q53.56-12.64 55.04-14.92L55.04-14.92Q55.96-16.36 57.26-17.44Q58.56-18.52 59.48-17.92L59.48-17.92Q60.04-17.60 60.14-16.88Q60.24-16.16 59.44-14.10Q58.64-12.04 56.76-8.72L56.76-8.72Q58.00-8.56 60.84-10.44L60.84-10.44Q61.36-10.80 61.62-10.94Q61.88-11.08 62.22-11.24Q62.56-11.40 62.80-11.36Q63.04-11.32 63.28-11.16L63.28-11.16Q63.88-10.68 63.48-9.48L63.48-9.48Q59.48 2.92 60.32 5.56L60.32 5.56Q60.40 5.72 60.44 5.80L60.44 5.80Q60.76 5.84 61.42 5.28Q62.08 4.72 63.06 3.52Q64.04 2.32 65.18 0.64Q66.32-1.04 67.70-3.48Q69.08-5.92 70.36-8.68L70.36-8.68Q70.52-9 70.82-9.10ZM55.28-11.80L55.28-11.80Q54.92-10.40 55.44-9.56L55.44-9.56Q58.36-14.64 58.56-16.44L58.56-16.44Q58.08-16.16 57.46-15.52Q56.84-14.88 56.18-13.86Q55.52-12.84 55.28-11.80Z" class="letter-2"/></g>
+<g><path d="M85.16-8.74Q85.48-8.80 85.74-8.64Q86.00-8.48 86.08-8.16Q86.16-7.84 86.00-7.60L86.00-7.60Q85.52-6.84 84.96-5.98Q84.40-5.12 83.30-3.64Q82.20-2.16 81.20-1.06Q80.20 0.04 79.04 0.88Q77.88 1.72 77.04 1.72L77.04 1.72Q76.72 1.72 76.48 1.60L76.48 1.60Q74.56 0.88 75.40-4.52L75.40-4.52Q74.08-2.72 73.00-1.80L73.00-1.80Q71.44-0.48 70.28-1.48L70.28-1.48Q69.20-2.36 69.30-4.60Q69.40-6.84 70.60-8.92L70.60-8.92Q70.76-9.20 71.08-9.28Q71.40-9.36 71.68-9.20Q71.96-9.04 72.04-8.74Q72.12-8.44 71.96-8.16L71.96-8.16Q71.28-7.04 71.02-5.80Q70.76-4.56 70.86-3.74Q70.96-2.92 71.24-2.68L71.24-2.68Q71.44-2.48 72.00-2.96L72.00-2.96Q73.04-3.84 74.60-6.12L74.60-6.12Q74.88-6.48 75.02-6.66Q75.16-6.84 75.36-7.10Q75.56-7.36 75.68-7.44Q75.80-7.52 75.96-7.62Q76.12-7.72 76.28-7.70Q76.44-7.68 76.64-7.60L76.64-7.60Q77.16-7.40 77.20-6.70Q77.24-6 77.00-4.88L77.00-4.88Q76.56-2.68 76.66-1.52Q76.76-0.36 76.84-0.10Q76.92 0.16 77.04 0.16L77.04 0.16Q77.16 0.24 77.46 0.10Q77.76-0.04 78.18-0.36Q78.60-0.68 79.12-1.18Q79.64-1.68 80.30-2.40Q80.96-3.12 81.64-3.98Q82.32-4.84 83.12-5.98Q83.92-7.12 84.68-8.40L84.68-8.40Q84.84-8.68 85.16-8.74Z" class="letter-3"/></g>
+<g><path d="M117.64-23.60L117.64-23.60Q117.84-23.36 117.80-23.04Q117.76-22.72 117.48-22.52L117.48-22.52Q117-22.20 116.56-22.56L116.56-22.56Q114.64-23.24 89.60-22.68L89.60-22.68Q87.00-11.76 84.32 1L84.32 1Q81.12 16.40 80.44 22.16L80.44 22.16Q80.52 22.16 80.60 22.20L80.60 22.20Q80.92 22.28 81.04 22.58Q81.16 22.88 81.04 23.16L81.04 23.16Q80.84 23.80 80.70 24.10Q80.56 24.40 80.28 24.70Q80.00 25 79.68 25L79.68 25Q79.56 25 79.40 24.96L79.40 24.96Q78.88 24.80 78.78 24.12Q78.68 23.44 78.88 22.28L78.88 22.28Q79.04 20.60 79.60 17.44L79.60 17.44Q80.60 11.44 82.60 1.84L82.60 1.84Q85.28-11.12 88.00-22.64L88.00-22.64Q85.28-22.60 81.24-22.48L81.24-22.48Q74.84-22.32 73.72-22.32L73.72-22.32Q73.40-22.32 73.18-22.54Q72.96-22.76 72.96-23.08L72.96-23.08Q72.96-23.28 73.06-23.46Q73.16-23.64 73.34-23.74Q73.52-23.84 73.72-23.84L73.72-23.84Q74.84-23.84 81.20-24.04L81.20-24.04Q85.16-24.12 88.40-24.20L88.40-24.20Q89.68-29.48 90.68-33.16L90.68-33.16Q90.76-33.48 91.04-33.64Q91.32-33.80 91.62-33.72Q91.92-33.64 92.08-33.36Q92.24-33.08 92.16-32.76L92.16-32.76Q91.20-29.20 89.96-24.24L89.96-24.24Q101.96-24.56 108.08-24.48Q114.20-24.40 115.78-24.22Q117.36-24.04 117.64-23.60Z" class="letter-4"/></g>
+<g><path d="M107.56-9.24Q107.88-9.32 108.14-9.16Q108.40-9 108.48-8.68Q108.56-8.36 108.40-8.08L108.40-8.08Q107.08-5.96 105.88-4.30Q104.68-2.64 103.82-1.62Q102.96-0.60 102.16 0.10Q101.36 0.80 100.88 1.10Q100.40 1.40 99.92 1.50Q99.44 1.60 99.26 1.58Q99.08 1.56 98.84 1.52L98.84 1.52Q96.96 1.04 96.72-2.76L96.72-2.76Q96.68-3.60 96.52-4.18Q96.36-4.76 96.24-4.94Q96.12-5.12 96.04-5.12L96.04-5.12Q96.00-5.12 96.00-5.12L96.00-5.12Q95.68-5.12 95.12-4.62Q94.56-4.12 93.76-3Q92.96-1.88 92.08-0.28Q91.20 1.32 90.14 3.76Q89.08 6.20 88.08 9.04L88.08 9.04Q87.92 9.56 87.36 9.56L87.36 9.56Q87.28 9.56 87.20 9.56L87.20 9.56Q87.00 9.52 86.86 9.40Q86.72 9.28 86.64 9.10Q86.56 8.92 86.60 8.76L86.60 8.76Q86.68 7.12 88.70-1.78Q90.72-10.68 92.02-16.10Q93.32-21.52 94.04-24.40L94.04-24.40Q95.40-29.92 97.18-33.82Q98.96-37.72 100.24-37.96L100.24-37.96Q100.92-38.08 101.28-37.56L101.28-37.56Q102.16-36.36 100.26-31.36Q98.36-26.36 94.36-19.12L94.36-19.12Q91.28-6.44 89.60 1.24L89.60 1.24Q91.36-2.48 93.08-4.66Q94.80-6.84 96.24-6.64L96.24-6.64Q98.04-6.40 98.24-2.88L98.24-2.88Q98.44-0.20 99.20 0L99.20 0Q99.32 0.04 99.54 0Q99.76-0.04 100.44-0.48Q101.12-0.92 101.92-1.78Q102.72-2.64 104.10-4.48Q105.48-6.32 107.08-8.92L107.08-8.92Q107.24-9.16 107.56-9.24ZM99.96-35.72L99.96-35.72Q97.76-32.56 95.84-25.28L95.84-25.28Q99.36-32.36 99.96-35.72Z" class="letter-5"/></g>
+<g><path d="M117.58-9.20Q117.88-9.28 118.16-9.12Q118.44-8.96 118.50-8.64Q118.56-8.32 118.40-8.04L118.40-8.04Q117.28-6.28 115.70-4.38Q114.12-2.48 112.14-0.96Q110.16 0.56 108.80 0.56L108.80 0.56Q108.32 0.56 107.96 0.40L107.96 0.40Q105.28-0.76 107.40-9L107.40-9Q107.48-9.32 107.76-9.48Q108.04-9.64 108.34-9.56Q108.64-9.48 108.80-9.20Q108.96-8.92 108.88-8.64L108.88-8.64Q108.40-6.72 108.18-5.26Q107.96-3.80 107.98-3.04Q108.00-2.28 108.14-1.78Q108.28-1.28 108.38-1.18Q108.48-1.08 108.56-1.04L108.56-1.04Q109.60-0.60 112.34-3.12Q115.08-5.64 117.08-8.88L117.08-8.88Q117.28-9.12 117.58-9.20ZM108.72-12.32L108.72-12.32Q107.56-12.40 108.00-13.28L108.00-13.28Q108.40-14 109.04-14.24L109.04-14.24Q110.04-14.56 110.24-13.72L110.24-13.72Q110.44-12.92 109.64-12.52L109.64-12.52Q109.24-12.32 108.72-12.32Z" class="letter-6"/></g>
+<g><path d="M132.80 1.20L132.80 1.20Q133.12 1.20 133.36 1.42Q133.60 1.64 133.60 1.96L133.60 1.96Q133.60 2.08 133.56 2.20Q133.52 2.32 133.46 2.42Q133.40 2.52 133.30 2.58Q133.20 2.64 133.08 2.68Q132.96 2.72 132.84 2.76L132.84 2.76Q132.56 2.76 129.28 2.76L129.28 2.76Q120.20 2.72 119.36 2.76L119.36 2.76Q119.36 2.80 119.32 2.80L119.32 2.80Q119.04 2.80 118.80 2.58Q118.56 2.36 118.56 2.04L118.56 2.04Q118.56 1.72 118.76 1.50Q118.96 1.28 119.28 1.24L119.28 1.24Q120.16 1.20 129.28 1.20L129.28 1.20Q132.56 1.20 132.80 1.20Z" class="letter-7"/></g>
+<g><path d="M175.38 9.52Q175.68 9.48 175.94 9.68Q176.20 9.88 176.22 10.20Q176.24 10.52 176.04 10.80L176.04 10.80Q173.92 13.40 171.56 13.40L171.56 13.40Q171.48 13.40 171.40 13.40L171.40 13.40Q170.56 13.40 169.72 13.06Q168.88 12.72 167.98 11.98Q167.08 11.24 166.40 10.56Q165.72 9.88 164.70 8.56Q163.68 7.24 163.08 6.44Q162.48 5.64 161.32 3.96L161.32 3.96Q159.64 1.64 158.70 0.36Q157.76-0.92 156.16-2.80Q154.56-4.68 153.12-5.92L153.12-5.92Q150.68-5.32 148.32-5.36L148.32-5.36Q143.44 14.60 142.68 20L142.68 20Q142.80 19.72 142.96 19.36L142.96 19.36Q143.08 19.08 143.38 18.96Q143.68 18.84 143.98 18.98Q144.28 19.12 144.38 19.42Q144.48 19.72 144.36 20L144.36 20Q143.96 20.92 143.66 21.48Q143.36 22.04 143.08 22.48Q142.80 22.92 142.54 23.12Q142.28 23.32 142.00 23.32L142.00 23.32Q141.84 23.32 141.68 23.24L141.68 23.24Q141.32 23.12 141.16 22.82Q141.00 22.52 141.00 21.54Q141.00 20.56 141.32 18.72Q141.64 16.88 142.30 13.72Q142.96 10.56 144.04 5.88Q145.12 1.20 146.76-5.48L146.76-5.48Q144.72-5.72 143.52-6.52Q142.32-7.32 142.00-8.36L142.00-8.36Q141.52-9.76 142.72-10.68L142.72-10.68Q144.44-12.04 148.04-10.76L148.04-10.76Q148.56-12.80 149.04-14.88L149.04-14.88Q152.48-28.88 153.40-32.96L153.40-32.96Q153.48-33.28 153.74-33.46Q154.00-33.64 154.32-33.56Q154.64-33.48 154.80-33.22Q154.96-32.96 154.92-32.64L154.92-32.64Q154.00-28.52 150.56-14.52L150.56-14.52Q149.80-11.56 149.48-10.12L149.48-10.12Q150.48-9.64 151.52-9.04L151.52-9.04Q152.48-8.44 153.48-7.64L153.48-7.64Q157.88-8.88 162.08-12.12Q166.28-15.36 169.48-20.80L169.48-20.80Q172.04-25.12 172.64-29.08Q173.24-33.04 171.72-35.52L171.72-35.52Q169.44-39.12 163.04-38.68L163.04-38.68Q159.88-38.48 156.40-37.34Q152.92-36.20 149.90-34.48Q146.88-32.76 144.38-30.52Q141.88-28.28 140.56-25.96L140.56-25.96Q138.00-21.48 140.04-17.44L140.04-17.44Q140.16-17.16 140.06-16.86Q139.96-16.56 139.68-16.42Q139.40-16.28 139.10-16.38Q138.80-16.48 138.64-16.76L138.64-16.76Q136.24-21.56 139.20-26.72L139.20-26.72Q141.12-30.08 144.98-33.08Q148.84-36.08 153.62-38Q158.40-39.92 162.96-40.24L162.96-40.24Q170.28-40.72 173.00-36.32L173.00-36.32Q174.76-33.48 174.18-29.10Q173.60-24.72 170.80-20L170.80-20Q167.04-13.60 161.16-9.60L161.16-9.60Q158.12-7.48 154.88-6.40L154.88-6.40Q156.20-5.16 157.70-3.36Q159.20-1.56 160.10-0.34Q161.00 0.88 162.56 3.08L162.56 3.08Q163.84 4.84 164.48 5.74Q165.12 6.64 166.24 8.02Q167.36 9.40 168.10 10.08Q168.84 10.76 169.76 11.30Q170.68 11.84 171.44 11.88L171.44 11.88Q173.12 11.92 174.88 9.80L174.88 9.80Q175.08 9.56 175.38 9.52ZM143.44-8.80L143.44-8.80Q143.56-8.40 144.00-8.04Q144.44-7.68 145.26-7.38Q146.08-7.08 147.12-6.96L147.12-6.96Q147.40-8.08 147.68-9.20L147.68-9.20Q146.04-9.84 144.96-9.84L144.96-9.84Q144.12-9.84 143.64-9.48L143.64-9.48Q143.32-9.20 143.44-8.80ZM148.68-6.92L148.68-6.92Q150.08-6.92 151.52-7.20L151.52-7.20Q151.12-7.48 150.72-7.72L150.72-7.72Q149.96-8.16 149.08-8.60L149.08-8.60Q148.80-7.44 148.68-6.92Z" class="letter-8"/></g>
+<g><path d="M185.40-9.06Q185.72-9.12 185.98-8.94Q186.24-8.76 186.28-8.44Q186.32-8.12 186.16-7.88L186.16-7.88Q181.64-1.56 177.92 1.08L177.92 1.08Q176.44 2.12 175.00 2.12L175.00 2.12Q173.88 2.12 173.04 1.52L173.04 1.52Q172.56 1.16 172.18 0.56Q171.80-0.04 171.52-1.12Q171.24-2.20 171.42-3.96Q171.60-5.72 172.32-7.96L172.32-7.96L172.32-8Q173.44-11.64 175.04-13.76Q176.64-15.88 177.92-15.92L177.92-15.92Q178.84-15.96 179.12-15.12L179.12-15.12Q179.56-13.96 178.08-11.84Q176.60-9.72 173.72-7.28L173.72-7.28Q173.24-5.72 173.04-4.40Q172.84-3.08 172.90-2.30Q172.96-1.52 173.18-0.94Q173.40-0.36 173.58-0.12Q173.76 0.12 173.96 0.28L173.96 0.28Q175.16 1.16 177.04-0.20L177.04-0.20Q180.56-2.68 184.88-8.76L184.88-8.76Q185.08-9 185.40-9.06ZM177.64-14.24L177.64-14.24Q176.24-13.36 174.88-10.44L174.88-10.44Q177.20-12.76 177.64-14.24Z" class="letter-9"/></g>
+<g><path d="M201.32-9.36Q201.64-9.40 201.88-9.18Q202.12-8.96 202.16-8.64Q202.20-8.32 201.96-8.08L201.96-8.08Q194.20 0.96 193.08 2.36L193.08 2.36Q192.40 3.24 191.76 4.08L191.76 4.08Q192.32 6.36 191.84 8.48Q191.36 10.60 190.48 12.12Q189.60 13.64 188.40 14.60L188.40 14.60Q187.28 15.56 186.32 15.56L186.32 15.56Q185.72 15.56 185.32 15.16L185.32 15.16Q183.20 13.12 190.08 3.76L190.08 3.76Q189.64 2.24 188.68 0.80L188.68 0.80Q186.68-2.20 185.72-4.20Q184.76-6.20 184.84-7.84L184.84-7.84Q184.92-9.44 185.70-10.72Q186.48-12 187.80-12.80L187.80-12.80Q188.92-13.48 190.16-13.60Q191.40-13.72 192.44-13.24L192.44-13.24Q192.72-13.08 192.82-12.78Q192.92-12.48 192.78-12.20Q192.64-11.92 192.34-11.82Q192.04-11.72 191.76-11.84L191.76-11.84Q190.32-12.52 188.60-11.48L188.60-11.48Q186.52-10.24 186.40-7.76L186.40-7.76Q186.32-6.44 187.24-4.62Q188.16-2.80 189.96-0.08L189.96-0.08Q190.72 1.08 191.20 2.28L191.20 2.28Q191.52 1.88 191.88 1.40L191.88 1.40Q193.00 0 200.80-9.08L200.80-9.08Q201.00-9.32 201.32-9.36ZM188.88 11.76L188.88 11.76Q190.64 9.08 190.44 5.88L190.44 5.88Q188.76 8.28 187.74 10.16Q186.72 12.04 186.50 12.86Q186.28 13.68 186.36 14L186.36 14Q186.72 13.96 187.44 13.38Q188.16 12.80 188.88 11.76Z" class="letter-10"/></g>
+<g><path d="M211.10-9.20Q211.40-9.28 211.68-9.12Q211.96-8.96 212.02-8.64Q212.08-8.32 211.92-8.04L211.92-8.04Q210.80-6.28 209.22-4.38Q207.64-2.48 205.66-0.96Q203.68 0.56 202.32 0.56L202.32 0.56Q201.84 0.56 201.48 0.40L201.48 0.40Q198.80-0.76 200.92-9L200.92-9Q201.00-9.32 201.28-9.48Q201.56-9.64 201.86-9.56Q202.16-9.48 202.32-9.20Q202.48-8.92 202.40-8.64L202.40-8.64Q201.92-6.72 201.70-5.26Q201.48-3.80 201.50-3.04Q201.52-2.28 201.66-1.78Q201.80-1.28 201.90-1.18Q202.00-1.08 202.08-1.04L202.08-1.04Q203.12-0.60 205.86-3.12Q208.60-5.64 210.60-8.88L210.60-8.88Q210.80-9.12 211.10-9.20ZM202.24-12.32L202.24-12.32Q201.08-12.40 201.52-13.28L201.52-13.28Q201.92-14 202.56-14.24L202.56-14.24Q203.56-14.56 203.76-13.72L203.76-13.72Q203.96-12.92 203.16-12.52L203.16-12.52Q202.76-12.32 202.24-12.32Z" class="letter-11"/></g>
+<g><path d="M225.60-9Q225.92-9.08 226.20-8.92Q226.48-8.76 226.56-8.46Q226.64-8.16 226.48-7.88L226.48-7.88Q225.12-5.48 224.12-4.08Q223.12-2.68 222.08-1.88Q221.04-1.08 220.04-1.20L220.04-1.20Q218.04-1.44 216.88-5.52L216.88-5.52Q216.04-8.28 215.44-8.28L215.44-8.28Q215.32-8.32 215.10-8.18Q214.88-8.04 214.40-7.46Q213.92-6.88 213.34-5.88Q212.76-4.88 211.82-2.92Q210.88-0.96 209.80 1.72L209.80 1.72Q209.60 2.20 209.08 2.20L209.08 2.20Q209.00 2.20 208.92 2.16L208.92 2.16Q208.24 2 208.32 1.32L208.32 1.32Q208.72-1.96 211.32-10.88L211.32-10.88Q211.60-11.80 211.72-12.28L211.72-12.28Q211.84-12.60 212.12-12.74Q212.40-12.88 212.70-12.80Q213.00-12.72 213.16-12.44Q213.32-12.16 213.20-11.84L213.20-11.84Q213.12-11.56 212.80-10.44L212.80-10.44Q211.92-7.36 211.44-5.64L211.44-5.64Q212.72-8.04 213.68-8.96Q214.64-9.88 215.52-9.84L215.52-9.84Q216.56-9.80 217.18-8.76Q217.80-7.72 218.36-5.92L218.36-5.92Q219.24-2.84 220.24-2.72L220.24-2.72Q220.72-2.64 221.42-3.26Q222.12-3.88 222.92-5.06Q223.72-6.24 224.14-6.92Q224.56-7.60 225.12-8.64L225.12-8.64Q225.28-8.92 225.60-9Z" class="letter-12"/></g>
+<g><path d="M265.96-8.20L265.96-8.20Q266.24-8 266.28-7.68Q266.32-7.36 266.16-7.12L266.16-7.12Q265.92-6.80 265.52-6.80L265.52-6.80Q265.36-6.80 265.20-6.88L265.20-6.88Q264.40-7.04 257.28-7.28L257.28-7.28Q255.32 0.92 254.12 6.60L254.12 6.60Q251.68 17.92 251.68 21.12L251.68 21.12Q251.84 20.84 252.04 20.52L252.04 20.52Q252.20 20.24 252.52 20.16Q252.84 20.08 253.10 20.24Q253.36 20.40 253.44 20.70Q253.52 21 253.36 21.28L253.36 21.28Q252.20 23.24 251.36 23.24L251.36 23.24Q251.16 23.24 250.96 23.16L250.96 23.16Q250.48 22.96 250.30 22.30Q250.12 21.64 250.22 19.78Q250.32 17.92 250.92 14.64Q251.52 11.36 252.70 5.94Q253.88 0.52 255.72-7.32L255.72-7.32Q253.00-7.40 247.60-7.52L247.60-7.52Q246.80-7.56 245.80-7.56L245.80-7.56Q239.76 3.92 236.44 8.48L236.44 8.48Q235.56 9.64 234.68 10.28Q233.80 10.92 233.04 11.02Q232.28 11.12 231.76 11Q231.24 10.88 230.76 10.60L230.76 10.60Q228.68 9.40 227.46 5.74Q226.24 2.08 226.36-2.38Q226.48-6.84 227.92-10.16L227.92-10.16Q229.72-14.24 233.18-15.64Q236.64-17.04 241.32-15.56L241.32-15.56Q241.64-15.48 241.78-15.20Q241.92-14.92 241.82-14.62Q241.72-14.32 241.44-14.16Q241.16-14 240.84-14.12L240.84-14.12Q239.28-14.60 237.80-14.72Q236.32-14.84 234.70-14.50Q233.08-14.16 231.68-12.90Q230.28-11.64 229.32-9.52L229.32-9.52Q228.60-7.88 228.24-5.88Q227.88-3.88 227.88-1.96Q227.88-0.04 228.16 1.82Q228.44 3.68 228.94 5.18Q229.44 6.68 230.10 7.76Q230.76 8.84 231.52 9.28L231.52 9.28Q233.20 10.24 235.20 7.56L235.20 7.56Q238.40 3.24 244.08-7.60L244.08-7.60Q233.68-7.88 232.72-8.08L232.72-8.08Q232.40-8.16 232.22-8.42Q232.04-8.68 232.10-9Q232.16-9.32 232.44-9.48Q232.72-9.64 233.00-9.60L233.00-9.60Q233.88-9.40 244.88-9.12L244.88-9.12Q246.64-12.56 250.20-19.52L250.20-19.52Q252.52-24.16 254.00-27.04Q255.48-29.92 256.90-32.52Q258.32-35.12 259.16-36.46Q260.00-37.80 260.76-38.78Q261.52-39.76 262.02-40.02Q262.52-40.28 263.00-40.12L263.00-40.12Q263.64-39.88 263.82-39.04Q264.00-38.20 263.84-36.72L263.84-36.72Q263.60-34.12 262.44-28.96L262.44-28.96Q261.96-26.68 260.00-18.64L260.00-18.64Q258.48-12.32 257.64-8.80L257.64-8.80Q265.44-8.56 265.96-8.20ZM247.64-9.08L247.64-9.08Q252.88-8.92 256.08-8.84L256.08-8.84Q257.16-13.48 258.48-19L258.48-19Q260.44-27 260.96-29.28L260.96-29.28Q262.52-36.36 262.36-38.36L262.36-38.36Q261.72-37.72 260.58-35.86Q259.44-34 257.70-30.72Q255.96-27.44 254.80-25.18Q253.64-22.92 251.56-18.84L251.56-18.84Q248.28-12.36 246.60-9.08L246.60-9.08Q246.76-9.08 247.10-9.08Q247.44-9.08 247.64-9.08Z" class="letter-13"/></g>
+<g><path d="M285.26-9.10Q285.56-9.20 285.84-9.06Q286.12-8.92 286.24-8.62Q286.36-8.32 286.20-8.04L286.20-8.04Q285.12-5.72 283.76-3.28Q282.40-0.84 280.78 1.66Q279.16 4.16 277.56 5.74Q275.96 7.32 274.84 7.32L274.84 7.32Q274.56 7.32 274.32 7.20L274.32 7.20Q272.68 6.56 273.28 2.24L273.28 2.24Q273.84-1.80 276.24-9.20L276.24-9.20Q276.20-9.20 276.18-9.18Q276.16-9.16 276.12-9.16L276.12-9.16Q275.24-8.56 274.66-8.24Q274.08-7.92 273.10-7.52Q272.12-7.12 271.24-7.16Q270.36-7.20 269.60-7.72L269.60-7.72Q268.08-8.80 268.04-10.72Q268.00-12.64 269.48-14.92L269.48-14.92Q270.40-16.36 271.70-17.44Q273.00-18.52 273.92-17.92L273.92-17.92Q274.48-17.60 274.58-16.88Q274.68-16.16 273.88-14.10Q273.08-12.04 271.20-8.72L271.20-8.72Q272.44-8.56 275.28-10.44L275.28-10.44Q275.80-10.80 276.06-10.94Q276.32-11.08 276.66-11.24Q277.00-11.40 277.24-11.36Q277.48-11.32 277.72-11.16L277.72-11.16Q278.32-10.68 277.92-9.48L277.92-9.48Q273.92 2.92 274.76 5.56L274.76 5.56Q274.84 5.72 274.88 5.80L274.88 5.80Q275.20 5.84 275.86 5.28Q276.52 4.72 277.50 3.52Q278.48 2.32 279.62 0.64Q280.76-1.04 282.14-3.48Q283.52-5.92 284.80-8.68L284.80-8.68Q284.96-9 285.26-9.10ZM269.72-11.80L269.72-11.80Q269.36-10.40 269.88-9.56L269.88-9.56Q272.80-14.64 273.00-16.44L273.00-16.44Q272.52-16.16 271.90-15.52Q271.28-14.88 270.62-13.86Q269.96-12.84 269.72-11.80Z" class="letter-14"/></g>
+<g><path d="M317.76-23.60L317.76-23.60Q317.96-23.36 317.92-23.04Q317.88-22.72 317.60-22.52L317.60-22.52Q317.12-22.20 316.68-22.56L316.68-22.56Q314.76-23.24 289.72-22.68L289.72-22.68Q287.12-11.76 284.44 1L284.44 1Q281.24 16.40 280.56 22.16L280.56 22.16Q280.64 22.16 280.72 22.20L280.72 22.20Q281.04 22.28 281.16 22.58Q281.28 22.88 281.16 23.16L281.16 23.16Q280.96 23.80 280.82 24.10Q280.68 24.40 280.40 24.70Q280.12 25 279.80 25L279.80 25Q279.68 25 279.52 24.96L279.52 24.96Q279 24.80 278.90 24.12Q278.80 23.44 279 22.28L279 22.28Q279.16 20.60 279.72 17.44L279.72 17.44Q280.72 11.44 282.72 1.84L282.72 1.84Q285.40-11.12 288.12-22.64L288.12-22.64Q285.40-22.60 281.36-22.48L281.36-22.48Q274.96-22.32 273.84-22.32L273.84-22.32Q273.52-22.32 273.30-22.54Q273.08-22.76 273.08-23.08L273.08-23.08Q273.08-23.28 273.18-23.46Q273.28-23.64 273.46-23.74Q273.64-23.84 273.84-23.84L273.84-23.84Q274.96-23.84 281.32-24.04L281.32-24.04Q285.28-24.12 288.52-24.20L288.52-24.20Q289.80-29.48 290.80-33.16L290.80-33.16Q290.88-33.48 291.16-33.64Q291.44-33.80 291.74-33.72Q292.04-33.64 292.20-33.36Q292.36-33.08 292.28-32.76L292.28-32.76Q291.32-29.20 290.08-24.24L290.08-24.24Q302.08-24.56 308.20-24.48Q314.32-24.40 315.90-24.22Q317.48-24.04 317.76-23.60Z" class="letter-15"/></g>
+<g><path d="M306.56-9.36Q306.88-9.40 307.12-9.18Q307.36-8.96 307.40-8.64Q307.44-8.32 307.20-8.08L307.20-8.08Q299.44 0.96 298.32 2.36L298.32 2.36Q297.64 3.24 297 4.08L297 4.08Q297.56 6.36 297.08 8.48Q296.60 10.60 295.72 12.12Q294.84 13.64 293.64 14.60L293.64 14.60Q292.52 15.56 291.56 15.56L291.56 15.56Q290.96 15.56 290.56 15.16L290.56 15.16Q288.44 13.12 295.32 3.76L295.32 3.76Q294.88 2.24 293.92 0.80L293.92 0.80Q291.92-2.20 290.96-4.20Q290-6.20 290.08-7.84L290.08-7.84Q290.16-9.44 290.94-10.72Q291.72-12 293.04-12.80L293.04-12.80Q294.16-13.48 295.40-13.60Q296.64-13.72 297.68-13.24L297.68-13.24Q297.96-13.08 298.06-12.78Q298.16-12.48 298.02-12.20Q297.88-11.92 297.58-11.82Q297.28-11.72 297-11.84L297-11.84Q295.56-12.52 293.84-11.48L293.84-11.48Q291.76-10.24 291.64-7.76L291.64-7.76Q291.56-6.44 292.48-4.62Q293.40-2.80 295.20-0.08L295.20-0.08Q295.96 1.08 296.44 2.28L296.44 2.28Q296.76 1.88 297.12 1.40L297.12 1.40Q298.24 0 306.04-9.08L306.04-9.08Q306.24-9.32 306.56-9.36ZM294.12 11.76L294.12 11.76Q295.88 9.08 295.68 5.88L295.68 5.88Q294 8.28 292.98 10.16Q291.96 12.04 291.74 12.86Q291.52 13.68 291.60 14L291.60 14Q291.96 13.96 292.68 13.38Q293.40 12.80 294.12 11.76Z" class="letter-16"/></g>
+</svg></div>
+            <h2 class="gold-text text-4xl mt-6">Every memory begins with a feeling...</h2>
+            <p class="serif-subtitle text-lg mt-2">and ends with an emotion preserved forever.</p>
+        </div>
+
+        <!-- Phase 2: Empathy Points -->
+        <div class="story-phase" id="phase2">
+            <h2 class="serif-subtitle text-xl italic leading-relaxed">
+                Some gifts are too special to throw away.<br>
+                Some flowers are too meaningful to dry and disappear.
+            </h2>
+        </div>
+
+
+
+
+
+        <!-- Phase 5: Preservation Story -->
+        <div class="story-phase" id="phase5">
+            <h2 class="gold-text text-4xl mb-4">We don’t just make products.</h2>
+            <h2 class="gold-text text-5xl">We preserve stories. <span class="text-white/80">Your stories.</span></h2>
+        </div>
+
+  
+
+        <!-- Phase 7: Creation Promise -->
+
+
+        <!-- Phase 8: Value Carries -->
+        <div class="story-phase" id="phase8">
+            <h2 class="serif-subtitle text-lg mb-6 tracking-widest uppercase">Each handmade piece carries</h2>
+            <div class="max-w-md mx-auto">
+                <span class="value-tag serif-subtitle" style="transition-delay: 0.1s;">Love</span>
+                <span class="value-tag serif-subtitle" style="transition-delay: 0.2s;">Special Moments </span>
+                <span class="value-tag serif-subtitle" style="transition-delay: 0.3s;">Deep Emotions</span>
+                <span class="value-tag serif-subtitle" style="transition-delay: 0.4s;">Personal Touch</span>
+                <span class="value-tag serif-subtitle" style="transition-delay: 0.5s;">Forever Value</span>
+                <span class="value-tag serif-subtitle" style="transition-delay: 0.25s;">Unique Stories</span>
+            </div>
+        </div>
+
+        
+
+        <!-- Phase 9: Branding Final -->
+         <!-- Phase 9 -->
+<div class="story-phase final-phase" id="phase9">
+
+    <div class="soft-glow"></div>
+
+    <h2 class="final-brand" style="font-family: 'Times New Roman', Times, serif;">
+        Shruthi ResinArts
+    </h2>
+
+    <p class="final-line">
+        Preserving your memories into forever keepsakes
+    </p>
+
+    <div class="simple-tags">
+
+        <span>Jewellery</span>
+        <span>Lockets</span>
+        <span>Flowers</span>
+        <span>EarRings</span>
+        <span>Keychains</span>
+        <span>Photo Frames</span>
+        <span>Custom Gifts</span>
+        <span>Phone Cases</span>
+
+    </div>
+
+    <button
+        onclick="window.location.href='home.html'"
+        class="final-enter-btn"
+    >
+        Enter Our World
+    </button>
+
+</div>
+
+        <div class="timeline-dots" id="dotsContainer">
+            <!-- Dots will be generated here -->
+        </div>
+    </div>
+
+   
+
+    <script>
+        // 1. Particle Logic
+        function initParticles() {
+            const field = document.getElementById('particleField');
+            for(let i=0; i<40; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.top = Math.random() * 100 + '%';
+                const size = Math.random() * 3 + 1 + 'px';
+                p.style.width = size; p.style.height = size;
+                p.style.setProperty('--duration', Math.random() * 5 + 3 + 's');
+                p.style.setProperty('--offset', (Math.random() * 50 - 25) + 'px');
+                p.style.setProperty('--opacity', Math.random() * 0.5 + 0.2);
+                field.appendChild(p);
+            }
+        }
+
+        // 2. Story Control
+       let current = 0;
+
+const phases = document.querySelectorAll('.story-phase');
+const dotsContainer = document.getElementById('dotsContainer');
+
+const nextBtn = document.getElementById('nextBtn');
+const prevBtn = document.getElementById('prevBtn');
+
+let storyTimer;
+
+// Create timeline dots
+phases.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = i === 0 ? 'dot active' : 'dot';
+    dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll('.dot');
+
+function showPhase(index){
+
+    phases.forEach(p => p.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+
+    phases[index].classList.add('active');
+    dots[index].classList.add('active');
+
+    // Left button hide on first phase
+    prevBtn.style.display =
+        index === 0 ? 'none' : 'flex';
+
+    // Right button hide on last phase
+    nextBtn.style.display =
+        index === phases.length - 1 ? 'none' : 'flex';
+}
+
+// Auto Story Change
+function startAutoStory(){
+
+    clearInterval(storyTimer);
+
+    storyTimer = setInterval(() => {
+
+        if(current < phases.length - 1){
+
+            current++;
+            showPhase(current);
+
+        } else {
+
+            clearInterval(storyTimer);
+
+        }
+
+    }, 9000);
+
+}
+
+// Next Button
+nextBtn.addEventListener('click', () => {
+
+    if(current < phases.length - 1){
+
+        current++;
+        showPhase(current);
+
+        // Restart timer after manual click
+        startAutoStory();
+
+    }
+
+});
+
+// Previous Button
+prevBtn.addEventListener('click', () => {
+
+    if(current > 0){
+
+        current--;
+        showPhase(current);
+
+        // Restart timer after manual click
+        startAutoStory();
+
+    }
+
+});
+
+// Initial load
+showPhase(current);
+startAutoStory();
+        // 3. Transitions
+        function transitionToSite() {
+            document.getElementById('introScene').style.opacity = '0';
+            document.getElementById('skipBtn').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('introScene').style.display = 'none';
+                document.getElementById('skipBtn').style.display = 'none';
+                const home = document.getElementById('homepage');
+                home.classList.add('visible');
+                document.body.style.overflowY = "auto";
+                document.querySelectorAll('.collection-card').forEach((card, i) => {
+                    setTimeout(() => card.classList.add('show'), i * 150 + 200);
+                });
+            }, 1000);
+        }
+
+        function skipToSite() {
+            clearInterval(storyTimer);
+            transitionToSite();
+        }
+
+        window.onload = initParticles;
+    </script>
+</body>
+</html>

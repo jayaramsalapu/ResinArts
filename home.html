@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shruthi ResinArt</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--gold:#d4af37;
+--gold-light:#f5d76e;
+--dark:#0f0b08;
+--cream:#fdf8f0;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:var(--cream);
+overflow-x:hidden;
+color:#111;
+}
+
+/* ========================= */
+/* GLOBAL */
+/* ========================= */
+
+.logo-font{
+font-family:'Great Vibes',cursive;
+line-height:1.3;
+}
+
+.heading-font{
+font-family:'Cormorant Garamond',serif;
+}
+
+.gold{
+background:linear-gradient(
+90deg,
+#7A5A12,
+#B8860B,
+#FFD700,
+#E5C15A,
+#7A5A12
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.section{
+padding:100px 20px;
+}
+
+.section-title{
+font-size:clamp(2.5rem,6vw,4.5rem);
+text-align:center;
+margin-bottom:60px;
+font-family:'Cormorant Garamond',serif;
+color:#1a140f;
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.hero{
+min-height:100dvh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px 20px;
+position:relative;
+overflow:hidden;
+background:
+linear-gradient(rgba(255,248,240,.92),rgba(255,248,240,.92)),
+url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1800&auto=format&fit=crop') center/cover;
+}
+
+.hero::before{
+content:'';
+position:absolute;
+width:500px;
+height:500px;
+background:radial-gradient(circle,
+rgba(212,175,55,.18),
+transparent 70%);
+filter:blur(30px);
+animation:glowMove 10s infinite alternate ease-in-out;
+}
+
+@keyframes glowMove{
+from{
+transform:translate(-120px,-80px);
+}
+to{
+transform:translate(120px,80px);
+}
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:900px;
+}
+
+.hero h1{
+font-size:clamp(4rem,10vw,7rem);
+}
+
+.hero p{
+margin-top:25px;
+font-size:1.2rem;
+line-height:2;
+color:#5e4720;
+}
+
+/* ========================= */
+/* FLOATING HERO IMAGES */
+/* ========================= */
+/* ========================= */
+/* FLOATING HERO IMAGES */
+/* ========================= */
+.hero-content{
+position:relative;
+z-index:5;
+max-width:900px;
+}
+
+.floating-img{
+position:absolute;
+width:145px;
+height:190px;
+padding:8px;
+border-radius:30px;
+overflow:hidden;
+background:rgba(255,255,255,.6);
+backdrop-filter:blur(10px);
+box-shadow:
+0 10px 35px rgba(0,0,0,.12),
+0 0 25px rgba(212,175,55,.12);
+z-index:1;
+animation:floatCard 6s ease-in-out infinite;
+}
+
+.floating-img img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:22px;
+}
+
+/* LEFT TOP */
+
+.float1{
+top:80%;
+left:-70%;
+transform:rotate(-10deg);
+}
+
+/* LEFT LOWER */
+
+.float2{
+top:80%;
+right:-70%;
+animation-delay:2s;
+transform:rotate(8deg);
+}
+
+/* RIGHT */
+
+
+
+/* Animation */
+
+@keyframes floatCard{
+
+0%{
+transform:translateY(0px) rotate(-6deg);
+}
+
+50%{
+transform:translateY(-16px) rotate(-2deg);
+}
+
+100%{
+transform:translateY(0px) rotate(-6deg);
+}
+
+}
+
+/* ========================= */
+/* COMPLETE MOBILE UI */
+/* ========================= */
+
+@media(max-width:768px){
+
+/* HERO */
+
+.hero{
+padding:60px 18px;
+min-height:100vh;
+}
+
+/* HERO CONTENT */
+
+.hero-content{
+max-width:100%;
+padding:0 10px;
+}
+
+/* LOGO */
+
+.hero h1{
+font-size:3.2rem !important;
+line-height:1.2;
+}
+
+/* TEXT */
+
+.hero p{
+font-size:.95rem;
+line-height:1.9;
+margin-top:18px;
+margin-bottom: 50px;
+padding:0 10px;
+}
+
+/* HIGHLIGHT TEXT */
+
+.hero p span{
+font-size:1rem !important;
+line-height:1.8;
+display:block;
+margin-top:10px;
+}
+
+/* BUTTONS */
+
+.btn-group{
+flex-direction:column;
+align-items:center;
+gap:14px;
+margin-top:30px;
+}
+
+.luxury-btn{
+width:220px;
+padding:14px 20px;
+font-size:.95rem;
+}
+
+/* FLOATING IMAGES */
+
+.floating-img{
+width:95px;
+height:125px;
+padding:6px;
+border-radius:22px;
+opacity:.95;
+}
+
+/* LEFT IMAGE */
+
+.float1{
+top:-150px;
+left:-8px;
+}
+
+/* RIGHT IMAGE */
+
+.float2{
+top:-150px;
+right:-8px;
+left:auto;
+}
+
+/* STORY SECTION */
+
+.story-section{
+padding:90px 20px;
+}
+
+.story-section h2{
+font-size:2.5rem;
+line-height:1.3;
+}
+
+.story-section p{
+font-size:1rem;
+line-height:1.9;
+margin-top:20px;
+}
+
+/* MEMORY WALL */
+
+.section{
+padding:70px 18px;
+}
+
+.section-title{
+font-size:2.4rem;
+margin-bottom:40px;
+}
+
+.gallery{
+grid-template-columns:1fr;
+gap:18px;
+}
+
+.gallery img{
+height:250px;
+border-radius:20px;
+}
+
+/* FOOTER */
+
+footer{
+padding:50px 20px;
+}
+
+footer h2{
+font-size:2.8rem !important;
+}
+
+footer p{
+font-size:.95rem;
+line-height:1.8;
+margin-top:10px;
+}
+
+/* EXTRA SMALL DEVICES */
+
+@media(max-width:420px){
+
+.hero h1{
+font-size:2.7rem !important;
+}
+
+.hero p{
+font-size:.88rem;
+}
+
+.floating-img{
+width:82px;
+height:110px;
+}
+
+.luxury-btn{
+width:200px;
+font-size:.9rem;
+}
+
+.story-section h2{
+font-size:2rem;
+}
+
+}
+
+}
+/* ========================= */
+/* BUTTONS */
+/* ========================= */
+
+.btn-group{
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:40px;
+}
+
+.luxury-btn{
+position:relative;
+overflow:hidden;
+padding:15px 36px;
+border-radius:50px;
+font-weight:600;
+transition:.4s;
+min-width:190px;
+text-align:center;
+cursor:pointer;
+border:none;
+}
+
+.gold-btn{
+background:linear-gradient(90deg,#b8860b,#ffd700);
+color:black;
+}
+
+.outline-btn{
+border:1px solid #d4af37;
+background:transparent;
+color:#b8860b;
+}
+
+.luxury-btn:hover{
+transform:translateY(-5px);
+}
+
+.luxury-btn::before{
+content:'';
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.7),
+transparent
+);
+transition:.8s;
+}
+
+.luxury-btn:hover::before{
+left:100%;
+}
+
+/* ========================= */
+/* COLLECTIONS */
+/* ========================= */
+
+.collections{
+background:white;
+}
+
+.grid-cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+max-width:1200px;
+margin:auto;
+}
+
+.card{
+background:rgba(255,255,255,.7);
+backdrop-filter:blur(10px);
+padding:40px 25px;
+border-radius:30px;
+border:1px solid rgba(212,175,55,.15);
+transition:.5s;
+box-shadow:0 10px 30px rgba(0,0,0,.04);
+}
+
+.card:hover{
+transform:translateY(-10px);
+border-color:#d4af37;
+box-shadow:0 20px 40px rgba(212,175,55,.12);
+}
+
+.card-icon{
+font-size:60px;
+}
+
+.card h3{
+margin-top:18px;
+font-size:1.5rem;
+font-weight:600;
+color:#1a140f;
+}
+
+.card p{
+margin-top:10px;
+line-height:1.8;
+color:#666;
+}
+
+/* ========================= */
+/* STORY SECTION */
+/* ========================= */
+
+.story-section{
+background:#0f0b08;
+color:white;
+text-align:center;
+padding:120px 20px;
+position:relative;
+overflow:hidden;
+}
+
+.story-section::before{
+content:'';
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle,
+rgba(212,175,55,.12),
+transparent 70%);
+}
+
+.story-content{
+position:relative;
+z-index:2;
+max-width:900px;
+margin:auto;
+}
+
+.story-section h2{
+font-size:clamp(3rem,8vw,5rem);
+line-height:1.3;
+}
+
+.story-section p{
+margin-top:30px;
+font-size:1.1rem;
+line-height:2;
+color:#e5d2a8;
+}
+
+/* ========================= */
+/* MEMORY WALL */
+/* ========================= */
+
+.memory-wall{
+background:#fffaf3;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.gallery img{
+width:100%;
+height:320px;
+object-fit:cover;
+border-radius:25px;
+transition:.5s;
+}
+
+.gallery img:hover{
+transform:scale(1.03);
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+footer{
+background:#090705;
+color:#d4af37;
+padding:60px 20px;
+text-align:center;
+}
+
+footer p{
+margin-top:15px;
+color:#e5d2a8;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:768px){
+
+.hero p{
+font-size:1rem;
+line-height:1.9;
+}
+
+.section{
+padding:80px 18px;
+}
+
+.card{
+padding:35px 20px;
+}
+
+.gallery img{
+height:260px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- HERO -->
+<!-- ========================= -->
+
+<section class="hero">
+
+<div class="hero-content">
+<!-- Floating Resin Images -->
+<!-- Floating Resin Images -->
+
+<div class="floating-img float1">
+    <img src="1.jpg">
+</div>
+
+<div class="floating-img float2">
+    <img src="2.jpg">
+</div>
+
+
+<h1 class="logo-font gold" style="font-size: 80px;">
+Shruthi_Resinarts
+</h1>
+
+<p class="heading-font">
+From flower preservation and jewellery preservation to personalized keepsakes<br> <br>
+<span style="font-family: 'Times New Roman', Times, serif; font-weight: 600; font-size: 1.25rem;"> Every creation is crafted with love,
+emotion and forever value.</span>
+</p>
+
+<div class="btn-group">
+
+<button class="luxury-btn gold-btn"> Collection
+</button>
+
+<button class="luxury-btn outline-btn" onclick="window.location.href='https://www.instagram.com/shruthi_resinarts.23?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='">
+Instagram
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- STORY -->
+<!-- ========================= -->
+
+<section class="story-section">
+
+<div class="story-content">
+
+<h2 class="logo-font gold">
+We don’t just make products.
+</h2>
+
+
+
+<p>
+Whether it’s flowers from a special day,
+a gift from someone you love,
+or your own creative idea —
+we turn it into timeless handmade art.
+</p>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- MEMORY WALL -->
+<!-- ========================= -->
+
+<section class="section memory-wall">
+
+<h2 class="section-title">
+Memory Wall
+</h2>
+
+<div class="gallery">
+
+<img src="2.jpg">
+
+<img src="1.jpg">
+
+<img src="3.jpg">
+
+<img src="4.jpg">
+
+<img src="5.jpg">
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer>
+
+<h2 class="logo-font text-6xl">
+Shruthi ResinArts
+</h2>
+
+<p>
+Made with love • Preserved forever ✨
+</p>
+
+</footer>
+
+</body>
+</html>
