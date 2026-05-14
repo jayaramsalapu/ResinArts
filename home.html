@@ -467,14 +467,14 @@ opacity:.95;
 /* LEFT IMAGE */
 
 .float1{
-top:-150px;
+top:-100px;
 left:-8px;
 }
 
 /* RIGHT IMAGE */
 
 .float2{
-top:-150px;
+top:-100px;
 right:-8px;
 left:auto;
 }
@@ -782,6 +782,214 @@ height:260px;
 
 }
 
+/* ========================= */
+/* BEFORE AFTER SECTION */
+/* ========================= */
+
+.before-after-section{
+padding:120px 20px;
+background:
+linear-gradient(
+180deg,
+#fffaf3,
+#fdf8f0
+);
+text-align:center;
+overflow:hidden;
+}
+
+.ba-subtext{
+margin-top:-30px;
+margin-bottom:50px;
+font-size:1.05rem;
+color:#7b6744;
+letter-spacing:.5px;
+}
+
+/* CONTAINER */
+
+.comparison-container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+/* IMAGE WRAPPER */
+
+.img-wrapper{
+position:relative;
+width:100%;
+height:500px;
+overflow:hidden;
+border-radius:35px;
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.12),
+0 0 40px rgba(212,175,55,.12);
+
+cursor:ew-resize;
+}
+
+/* IMAGES */
+
+.before-img,
+.after-img{
+width:100%;
+height:100%;
+object-fit:cover;
+position:absolute;
+inset:0;
+user-select:none;
+pointer-events:none;
+}
+
+/* AFTER IMAGE WRAPPER */
+
+.after-wrapper{
+position:absolute;
+top:0;
+left:0;
+height:100%;
+width:50%;
+overflow:hidden;
+}
+
+/* SLIDER LINE */
+
+.slider-line{
+position:absolute;
+top:0;
+left:50%;
+
+transform:translateX(-50%);
+
+width:4px;
+height:100%;
+
+background:linear-gradient(
+180deg,
+#ffd700,
+#b8860b
+);
+
+z-index:10;
+}
+
+/* SLIDER BUTTON */
+
+.slider-button{
+position:absolute;
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+width:70px;
+height:70px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.95);
+
+backdrop-filter:blur(10px);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:28px;
+color:#b8860b;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.15),
+0 0 25px rgba(212,175,55,.25);
+
+border:2px solid rgba(212,175,55,.4);
+
+transition:.3s;
+}
+
+.slider-button:hover{
+transform:translate(-50%,-50%) scale(1.08);
+}
+
+/* LABELS */
+
+.label{
+position:absolute;
+top:25px;
+
+padding:10px 22px;
+
+border-radius:50px;
+
+background:rgba(0,0,0,.45);
+
+backdrop-filter:blur(8px);
+
+color:white;
+font-weight:600;
+letter-spacing:1px;
+
+z-index:11;
+}
+
+.before-label{
+left:25px;
+}
+
+.after-label{
+right:25px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.before-after-section{
+padding:90px 15px;
+}
+
+.img-wrapper{
+height:420px;
+border-radius:25px;
+}
+
+.slider-button{
+width:55px;
+height:55px;
+font-size:20px;
+}
+
+.label{
+padding:8px 16px;
+font-size:.85rem;
+}
+
+.ba-subtext{
+font-size:.95rem;
+line-height:1.8;
+padding:0 10px;
+}
+
+}
+
+@media(max-width:480px){
+
+.img-wrapper{
+height:340px;
+}
+
+.slider-button{
+width:50px;
+height:50px;
+font-size:18px;
+}
+
+}
+
+</style>
+
 </style>
 
 </head>
@@ -809,7 +1017,7 @@ height:260px;
 
 <h1 class="logo-font gold">
 
-<h1 class="logo-font gold" style="font-size: 80px;">
+<h1 class="logo-font gold" style="font-size: 80px;margin-top:70px">
 Shruthi_Resinarts
 </h1>
 
@@ -853,13 +1061,62 @@ We don’t just make products.
 <p>
 Whether it’s flowers from a special day,
 a gift from someone you love,
-or your own creative idea —
+or your own creative idea <br> —
 we turn it into timeless handmade art.
 </p>
 
 </div>
 
 </section>
+
+
+
+
+<section class="before-after-section">
+
+<h2 class="section-title heading-font">
+Before <span class="gold">&</span> After
+</h2>
+
+<p class="ba-subtext">
+From real flowers and memories to timeless resin art ✨
+</p>
+
+<div class="comparison-container">
+
+<div class="img-wrapper">
+
+<!-- BEFORE IMAGE -->
+<img src="1.jpg" class="before-img"  >
+
+<!-- AFTER IMAGE -->
+<div class="after-wrapper" id="afterWrapper">
+<img src="8.png" class="after-img">
+</div>
+
+<!-- SLIDER LINE -->
+<div class="slider-line" id="sliderLine">
+<div class="slider-button">
+✦
+</div>
+</div>
+
+<!-- LABELS -->
+<div class="label before-label">
+Before
+</div>
+
+<div class="label after-label">
+After
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
 
 <!-- ========================= -->
 <!-- MEMORY WALL -->
@@ -877,9 +1134,9 @@ Memory Wall
 
 <img src="1.jpg">
 
-<img src="3.jpg">
-
 <img src="4.jpg">
+
+<img src="3.jpg">
 
 <img src="5.jpg">
 
@@ -887,13 +1144,17 @@ Memory Wall
 
 </section>
 
+
+
+
+
 <!-- ========================= -->
 <!-- FOOTER -->
 <!-- ========================= -->
 
 <footer>
 
-<h2 class="logo-font text-6xl">
+<h2 style="font-family:sans-serif">
 Shruthi ResinArts
 </h2>
 
