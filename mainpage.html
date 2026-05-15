@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mainpage.css">
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+        rel="stylesheet">
+    <title>Shruthi ResinArts</title>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="sign">Shruthi ResinArts</div>
+    </header>
+
+    <main class="main">
+        <section class="content">
+            <div class="image"><img src="mainpage_resinarts.png" alt="Resin Art Hero Banner"></div>
+            <div class="text">
+                <h1>GOLDEN HOUR FOREVER</h1>
+                <p>wear the moments you love most</p>
+            </div>
+        </section>
+
+        <div class="catalog">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="filter active" onclick="showCategory('jewellery')">JEWELLERY</div>
+                <div class="filter" onclick="showCategory('lockets')">LOCKETS</div>
+                <div class="filter" onclick="showCategory('earrings')">EARRINGS</div>
+                <div class="filter" onclick="showCategory('keychains')">KEYCHAINS</div>
+                <div class="filter" onclick="showCategory('flowers')">FLOWERS</div>
+                <div class="filter" onclick="showCategory('phone-cases')">PHONE CASES</div>
+                <div class="filter" onclick="showCategory('photo-frames')">PHOTO FRAMES</div>
+                <div class="filter" onclick="showCategory('custom-gifts')">CUSTOM GIFTS</div>
+            </aside>
+
+            <!-- PRODUCTS GRID -->
+            <section class="products">
+
+                <!-- ==================== JEWELLERY ==================== -->
+                <div class="product-box jewellery">
+                    <div class="slider">
+                        <img src="images/jewel1.jpg" class="slide active" alt="Resin Necklace View 1">
+                        <img src="images/jewel2.jpg" class="slide" alt="Resin Necklace View 2">
+                        <img src="images/jewel3.png" class="slide" alt="Resin Necklace View 3">
+                        <img src="images/jewel4.png" class="slide" alt="Resin Necklace View 4">
+                    </div>
+                    <div class="product-info">
+                        <h3>Pressed Flower Necklace</h3>
+                        <p class="price">₹499</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box jewellery">
+                    <div class="slider">
+                        <img src="images/jewel1.jpg" class="slide active" alt="Gold Flake Bracelet">
+                        <img src="images/jewel2.jpg" class="slide" alt="Gold Flake Bracelet Detail">
+                    </div>
+                    <div class="product-info">
+                        <h3>Gold Flake Resin Cuff</h3>
+                        <p class="price">₹399</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box jewellery">
+                    <div class="slider">
+                        <img src="images/jewel3.png" class="slide active" alt="Ocean Wave Ring">
+                    </div>
+                    <div class="product-info">
+                        <h3>Ocean Wave Resin Ring</h3>
+                        <p class="price">₹299</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+
+                <!-- ==================== LOCKETS ==================== -->
+                <div class="product-box lockets hidden">
+                    <div class="slider">
+                        <img src="images/locket1.png" class="slide active" alt="Photo Locket">
+                        <img src="images/locket2.png" class="slide" alt="Photo Locket Interior">
+                    </div>
+                    <div class="product-info">
+                        <h3>Vintage Photo Locket</h3>
+                        <p class="price">₹699</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box lockets hidden">
+                    <div class="slider">
+                        <img src="images/locket3.png" class="slide active" alt="Hair Keepsake Locket">
+                        <img src="images/locket4.png" class="slide" alt="Hair Keepsake Locket Back">
+                    </div>
+                    <div class="product-info">
+                        <h3>Memory Keepsake Locket</h3>
+                        <p class="price">₹749</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box lockets hidden">
+                    <div class="slider">
+                        <img src="images/locket1.png" class="slide active" alt="Terrarium Locket">
+                    </div>
+                    <div class="product-info">
+                        <h3>Mini Terrarium Locket</h3>
+                        <p class="price">₹649</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+
+                <!-- ==================== EARRINGS ==================== -->
+                <div class="product-box earrings hidden">
+                    <div class="slider">
+                        <img src="images/locket1.png" class="slide active" alt="Resin Earrings">
+                        <img src="images/locket2.png" class="slide" alt="Resin Earrings Alternative View">
+                    </div>
+                    <div class="product-info">
+                        <h3>Botanical Drop Earrings</h3>
+                        <p class="price">₹299</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box earrings hidden">
+                    <div class="slider">
+                        <img src="images/locket3.png" class="slide active" alt="Glitter Studs">
+                    </div>
+                    <div class="product-info">
+                        <h3>Chunky Glitter Studs</h3>
+                        <p class="price">₹199</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box earrings hidden">
+                    <div class="slider">
+                        <img src="images/locket4.png" class="slide active" alt="Geometric Hoops">
+                    </div>
+                    <div class="product-info">
+                        <h3>Geometric Resin Hoops</h3>
+                        <p class="price">₹349</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+
+                <!-- ==================== KEYCHAINS ==================== -->
+                <div class="product-box keychains hidden">
+                    <div class="slider">
+                        <img src="images/locket1.png" class="slide active" alt="Alphabet Keychain">
+                        <img src="images/locket2.png" class="slide" alt="Alphabet Keychain Variant">
+                    </div>
+                    <div class="product-info">
+                        <h3>Custom Alphabet Keychain</h3>
+                        <p class="price">₹249</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box keychains hidden">
+                    <div class="slider">
+                        <img src="images/locket3.png" class="slide active" alt="Pet Photo Keychain">
+                    </div>
+                    <div class="product-info">
+                        <h3>Mini Pet Photo Keychain</h3>
+                        <p class="price">₹299</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box keychains hidden">
+                    <div class="slider">
+                        <img src="images/locket4.png" class="slide active" alt="Beach Sand Keychain">
+                    </div>
+                    <div class="product-info">
+                        <h3>Real Beach Sand Keychain</h3>
+                        <p class="price">₹279</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+
+                <!-- ==================== FLOWERS ==================== -->
+                <div class="product-box flowers hidden">
+                    <div class="slider">
+                        <img src="images/locket1.png" class="slide active" alt="Resin Flower Block">
+                        <img src="images/locket2.png" class="slide" alt="Resin Flower Block Detail">
+                    </div>
+                    <div class="product-info">
+                        <h3>Rose Preservation Block</h3>
+                        <p class="price">₹1499</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box flowers hidden">
+                    <div class="slider">
+                        <img src="images/locket3.png" class="slide active" alt="Resin Coasters">
+                    </div>
+                    <div class="product-info">
+                        <h3>Floral Resin Coasters (Set of 2)</h3>
+                        <p class="price">₹599</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box flowers hidden">
+                    <div class="slider">
+                        <img src="images/locket4.png" class="slide active" alt="Flower Paperweight">
+                    </div>
+                    <div class="product-info">
+                        <h3>Marigold Hexagon Paperweight</h3>
+                        <p class="price">₹450</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+
+                <!-- ==================== PHONE CASES ==================== -->
+                <div class="product-box phone-cases hidden">
+                    <div class="slider">
+                        <img src="images/locket1.png" class="slide active" alt="Pressed Flower Phone Case">
+                        <img src="images/locket2.png" class="slide" alt="Pressed Flower Phone Case Angle">
+                    </div>
+                    <div class="product-info">
+                        <h3>Pressed Daisy Phone Case</h3>
+                        <p class="price">₹399</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box phone-cases hidden">
+                    <div class="slider">
+                        <img src="images/locket3.png" class="slide active" alt="Gold Leaf Phone Case">
+                    </div>
+                    <div class="product-info">
+                        <h3>Abstract Gold Leaf Case</h3>
+                        <p class="price">₹399</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box phone-cases hidden">
+                    <div class="slider">
+                        <img src="images/locket4.png" class="slide active" alt="Ocean Fluid Phone Case">
+                    </div>
+                    <div class="product-info">
+                        <h3>Ocean Fluid Art Case</h3>
+                        <p class="price">₹449</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+
+                <!-- ==================== PHOTO FRAMES ==================== -->
+                <div class="product-box photo-frames hidden">
+                    <div class="slider">
+                        <img src="images/locket1.png" class="slide active" alt="Resin Photo Frame">
+                        <img src="images/locket2.png" class="slide" alt="Resin Photo Frame Angle">
+                    </div>
+                    <div class="product-info">
+                        <h3>Classic Floral Photo Frame</h3>
+                        <p class="price">₹799</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box photo-frames hidden">
+                    <div class="slider">
+                        <img src="images/locket3.png" class="slide active" alt="Glow in the Dark Frame">
+                    </div>
+                    <div class="product-info">
+                        <h3>Luminous Nightsky Frame</h3>
+                        <p class="price">₹899</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box photo-frames hidden">
+                    <div class="slider">
+                        <img src="images/locket4.png" class="slide active" alt="Geode Edge Frame">
+                    </div>
+                    <div class="product-info">
+                        <h3>Luxury Geode Edge Frame</h3>
+                        <p class="price">₹999</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+
+                <!-- ==================== CUSTOM GIFTS ==================== -->
+                <div class="product-box custom-gifts hidden">
+                    <div class="slider">
+                        <img src="images/locket1.png" class="slide active" alt="Custom Gift Block">
+                        <img src="images/locket2.png" class="slide" alt="Custom Gift Stand">
+                    </div>
+                    <div class="product-info">
+                        <h3>Custom Wedding Garland Frame</h3>
+                        <p class="price">₹2499</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box custom-gifts hidden">
+                    <div class="slider">
+                        <img src="images/locket3.png" class="slide active" alt="Resin Wall Clock">
+                    </div>
+                    <div class="product-info">
+                        <h3>Custom Ocean Resin Wall Clock</h3>
+                        <p class="price">1899</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="product-box custom-gifts hidden">
+                    <div class="slider">
+                        <img src="images/locket4.png" class="slide active" alt="Resin Nameplate">
+                    </div>
+                    <div class="product-info">
+                        <h3>LED Custom Resin Nameplate</h3>
+                        <p class="price">₹1599</p>
+                        <button class="order-btn">Order on WhatsApp</button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Optimized Scripts -->
+    <script>
+        function showCategory(category) {
+            const products = document.querySelectorAll('.product-box');
+            products.forEach(product => {
+                if (product.classList.contains(category)) {
+                    product.classList.remove('hidden');
+                } else {
+                    product.classList.add('hidden');
+                }
+            });
+
+            const filters = document.querySelectorAll('.filter');
+            filters.forEach(filter => {
+                filter.classList.remove('active');
+            });
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+        }
+
+        // Auto image transitions
+        const sliders = document.querySelectorAll('.slider');
+        sliders.forEach(slider => {
+            const slides = slider.querySelectorAll('.slide');
+            let index = 0;
+            if (slides.length > 1) {
+                setInterval(() => {
+                    slides[index].classList.remove('active');
+                    index = (index + 1) % slides.length;
+                    slides[index].classList.add('active');
+                }, 2500);
+            }
+        });
+
+        // WhatsApp dynamic messaging APIs
+        const buttons = document.querySelectorAll('.order-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const productBox = button.closest('.product-box');
+                const name = productBox.querySelector('h3').innerText;
+                const price = productBox.querySelector('.price').innerText;
+                const activeImgNode = productBox.querySelector('.slide.active');
+                const activeImage = activeImgNode ? activeImgNode.src : '';
+
+                const message = `Hello, I am interested in this product.\n\nProduct: ${name}\nPrice: ${price}\n\nProduct Image:\n${activeImage}`;
+                const phoneNumber = "916309080712";
+                const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+                window.open(whatsappURL, '_blank');
+            });
+        });
+    </script>
+</body>
+
+</html>
